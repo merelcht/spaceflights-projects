@@ -1,0 +1,47 @@
+companies:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/companies.csv
+
+reviews:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/reviews.csv
+
+shuttles:
+  type: pandas.ExcelDataSet
+  filepath: data/01_raw/shuttles.xlsx
+  load_args:
+    engine: openpyxl # Use modern Excel engine, it is the default since Kedro 0.18.0
+
+preprocessed_companies:
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/preprocessed_companies.pq
+
+preprocessed_shuttles:
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/preprocessed_shuttles.pq
+
+model_input_table:
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/model_input_table.pq
+
+regressor:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/regressor.pickle
+  versioned: true
+
+#X_test:
+#  type: pickle.PickleDataSet
+#  filepath: data/05_model_input/example_test_x.pkl
+
+#X_train:
+#  type: pickle.PickleDataSet
+#  filepath: data/05_model_input/example_train_x.pkl
+
+#y_test:
+#  type: pickle.PickleDataSet
+#  filepath: data/05_model_input/example_test_y.pkl
+
+#y_train:
+#  type: pickle.PickleDataSet
+#  filepath: data/05_model_input/example_train_y.pkl
+
