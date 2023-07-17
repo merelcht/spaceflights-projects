@@ -122,14 +122,14 @@ with DAG(
 
 
 
-    tasks["create-model-input-table-node"] >> tasks["split-data-node"]
+    tasks["split-data-node"] >> tasks["train-model-node"]
 
     tasks["split-data-node"] >> tasks["evaluate-model-node"]
 
-    tasks["split-data-node"] >> tasks["train-model-node"]
-
     tasks["train-model-node"] >> tasks["evaluate-model-node"]
+
+    tasks["preprocess-shuttles-node"] >> tasks["create-model-input-table-node"]
 
     tasks["preprocess-companies-node"] >> tasks["create-model-input-table-node"]
 
-    tasks["preprocess-shuttles-node"] >> tasks["create-model-input-table-node"]
+    tasks["create-model-input-table-node"] >> tasks["split-data-node"]
