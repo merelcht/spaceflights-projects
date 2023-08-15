@@ -1,5 +1,5 @@
 import pandas as pd
-
+from typing import Tuple, Dict
 
 def _is_true(x: pd.Series) -> pd.Series:
     return x == "t"
@@ -17,7 +17,7 @@ def _parse_money(x: pd.Series) -> pd.Series:
     return x
 
 
-def preprocess_companies(companies: pd.DataFrame) -> pd.DataFrame:
+def preprocess_companies(companies: pd.DataFrame) -> Tuple[pd.DataFrame, Dict]:
     """Preprocesses the data for companies.
 
     Args:
@@ -28,7 +28,7 @@ def preprocess_companies(companies: pd.DataFrame) -> pd.DataFrame:
     """
     companies["iata_approved"] = _is_true(companies["iata_approved"])
     companies["company_rating"] = _parse_percentage(companies["company_rating"])
-    return companies
+    return companies, {"columns": companies.columns.tolist(), "data_type": "companies"}
 
 
 def preprocess_shuttles(shuttles: pd.DataFrame) -> pd.DataFrame:
