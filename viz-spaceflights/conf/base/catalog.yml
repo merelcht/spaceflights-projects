@@ -77,3 +77,23 @@ metrics:
 companies_columns:
   type: tracking.JSONDataSet
   filepath: data/09_tracking/companies_columns.json
+
+shuttle_passenger_capacity_plot_exp:
+  type: plotly.PlotlyDataSet
+  filepath: data/08_reporting/shuttle_passenger_capacity_plot_exp.json
+  versioned: true
+  plotly_args:
+    type: bar
+    fig:
+      x: shuttle_type
+      y: passenger_capacity
+      orientation: h
+    layout:
+      xaxis_title: Shuttles
+      yaxis_title: Average passenger capacity
+      title: Shuttle Passenger capacity
+
+shuttle_passenger_capacity_plot_go:
+  type: plotly.JSONDataSet
+  filepath: data/08_reporting/shuttle_passenger_capacity_plot_go.json
+  versioned: true
