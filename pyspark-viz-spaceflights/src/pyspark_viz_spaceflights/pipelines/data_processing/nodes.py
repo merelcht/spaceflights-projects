@@ -1,3 +1,5 @@
+from typing import Tuple, Dict
+
 import pandas as pd
 from pyspark.sql import DataFrame as SparkDataFrame, Column
 from pyspark.sql.functions import regexp_replace
@@ -21,7 +23,7 @@ def _parse_money(x: Column) -> Column:
     return x
 
 
-def preprocess_companies(companies: SparkDataFrame) -> SparkDataFrame:
+def preprocess_companies(companies: SparkDataFrame) -> Tuple[SparkDataFrame, Dict]:
     """Preprocesses the data for companies.
 
     Args:
@@ -32,7 +34,7 @@ def preprocess_companies(companies: SparkDataFrame) -> SparkDataFrame:
     """
     companies = companies.withColumn("iata_approved", _is_true(companies.iata_approved))
     companies = companies.withColumn("company_rating", _parse_percentage(companies.company_rating))
-    return companies
+    return companies, {"columns": companies.columns, "data_type": "companies"}
 
 
 def load_shuttles_to_csv(shuttles: pd.DataFrame) -> pd.DataFrame:
